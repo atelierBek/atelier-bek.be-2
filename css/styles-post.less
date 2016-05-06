@@ -1,0 +1,156 @@
+// @
+
+@u: 10px;
+@fu: 10pt;
+
+@c1: black;
+
+// # GLOBAL
+
+* {
+ // background-color: rgba(0,0,0,0.1);
+}
+
+body {
+    font-size: @fu;
+}
+
+// # CONTENT
+
+#contentDiv {
+    width: calc(~"50% - "@u*4);
+    height: auto;
+    padding: @u*2;
+}
+
+.block {
+    display: block;
+}
+
+.none {
+    display: none;
+}
+
+.post {
+    margin-bottom: @u*8;
+}
+
+.post .text {
+    margin-bottom: @u*1;
+    font-family: 'HKGrotesk-Regular';
+    font-size: 160%;
+    line-height: 1.1;
+    white-space:pre-wrap;
+}
+
+.post a {
+    font-family: 'HKGrotesk-Light';
+    color: @c1;
+    text-decoration: none;
+}
+
+.post a:hover {
+    text-decoration: underline;
+}
+
+
+.post .images {
+    margin-bottom: @u*1;
+}
+
+.post .images .image {
+    max-width: 160px;
+    max-height: 160px;
+    margin-bottom: @u*1;
+    margin-left: @u*1;
+    vertical-align: top;
+    border: 1px solid @c1;
+}
+
+.post .files {
+    margin-bottom: @u*1;
+}
+
+.post .files .file {
+    margin-left: @u*2;
+    font-family: 'HKGrotesk-Regular';
+    font-size: 180%;
+}
+
+.post .datas {
+    font-family: 'HKGrotesk-Regular';
+    font-size: 100%;
+}
+
+// # QUART
+.quart {
+    width: calc(~"25% - "@u*4);
+    max-height: calc(~"100% - "@u*4);
+    padding: @u*2;
+    position: fixed;
+    top: 0;
+    overflow: auto;
+    font-family: 'HKGrotesk-Regular';
+    font-size: 100%;
+}
+
+.quart > div {
+    margin-top: @u*2;
+}
+
+.quart > div:first-child {
+    margin-top: 0;
+}
+
+.quart > div h2 {
+    font-family: 'HKGrotesk-Regular';
+    font-size: 120%;
+    margin-bottom: @u/5;
+}
+
+.quart > div p {
+    margin-bottom: @u/2;
+}
+
+
+// # NAV
+
+#navDiv {
+    left: 50%;
+}
+
+#navDiv input[type=text] {
+    width: 100%;
+    height: auto;
+}
+
+#navDiv .filterBtn {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    color: @c1;
+    margin: 2px;
+    padding-bottom: 1px;
+    border-bottom: 1px solid transparent;
+}
+
+#navDiv .filterBtn:hover {
+    border-bottom: 1px solid @c1;
+}
+
+#navDiv .checked {
+    border-bottom: 1px solid @c1;
+}
+
+// # SEND 
+
+#sendDiv {
+    left: 75%;
+}
+
+#sendDiv textarea {
+    width: 100%;
+    height: 200px;
+    border: 1px solid @c1;
+}
+
