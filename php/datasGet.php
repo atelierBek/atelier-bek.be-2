@@ -36,13 +36,11 @@
 
 	# images
 	echo "<div class=\"images\">";
-	$imagesExt ="jpg,JPG,jpeg,JPEG,gif,GIF,png,PNG";
-	$imagesExtArr = explode(",", $imagesExt);
-	$images = glob($post . "/files/*" . "{" . "." . $imagesExt . "}",GLOB_BRACE );
+	$images = glob($post . "/images_resized/*");
 	foreach ($images as $image) {
 	    $imageName = basename($image);
 	    $imageExt = pathinfo($image, PATHINFO_EXTENSION);
-	    $imagePath = substr($image,3);
+	    $imagePath = substr($image,3); #remove ../
 	    echo "<img class=\"image\" src=\"" . $imagePath . "\">"; 
 	}	    
 	echo "</div>";
@@ -53,7 +51,7 @@
 	foreach ($files as $file) {
 		$fileName = basename($file);
 		$fileExt = pathinfo($file, PATHINFO_EXTENSION);
-		$filePath = substr($file,3);
+		$filePath = substr($file,3); #remove ../
 		if (in_array($fileExt, $imagesExtArr)) {
 		} else {
 		    echo "<p><a class=\"file\" href=\"" . $filePath . "\">" . $fileName . "</a></p>"; 

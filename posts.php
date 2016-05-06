@@ -10,8 +10,8 @@
 	?>
 
 	<link rel="stylesheet/less" type="text/css" href="css/reset.less" />
-	<link rel="stylesheet" type="text/css" href="lib/jquery-ui-1.11.4/jquery-ui-custom.css" />
 	<link rel="stylesheet" type="text/css" href="fonts/output-stylesheet.css" />
+	<link rel="stylesheet" type="text/css" href="lib/jquery-ui-1.11.4/jquery-ui-custom.css" />
 	<link rel="stylesheet/less" type="text/css" href="css/styles-post.less" />
 	
 	<script type="text/javascript" src="lib/less.min.js"></script>
@@ -21,6 +21,7 @@
     </head>
 
   <body>
+    
     
     <?php include "php/vars.php"; ?>
     

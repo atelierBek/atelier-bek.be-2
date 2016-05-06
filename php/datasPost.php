@@ -1,5 +1,6 @@
 <?php
-    
+
+
     # dirDatas
     $dirDatas = "../datas";
 
@@ -10,6 +11,7 @@
     $dateValue = $_POST['data'][3];    
     $timeValue = $_POST['data'][4];
 
+    # get files from post
     $fileCount = count($_FILES['file']['name']);
 
     $reg_date = '/\b[0-9][0-9]-(0[1-9]|1[0-2])-([0-2][0-9]|3[0-1])\b/';
@@ -27,7 +29,6 @@
     } else if (!preg_match($reg_time, $timeValue) && !empty($timeValue)) {
 	echo "Merci de choisir une heure au format hh-mm-ss.";
     } else {
-
 
     # generate send date and time if empty
     if (empty($dateValue)) {
@@ -52,21 +53,34 @@
 
     # create post dir + files dir and move uploaded files
     mkdir($dirDatas . "/" . $sendDateTimeValue, 0777);
-    #mkdir($dirDatas . "/" . $sendDateTimeValue . "/" . "files", 0777);
-    #mkdir($dirDatas . "/" . $sendDateTimeValue . "/" . "images_sources", 0777);
-    #mkdir($dirDatas . "/" . $sendDateTimeValue . "/" . "images_resized", 0777);
+    mkdir($dirDatas . "/" . $sendDateTimeValue . "/" . "files", 0777);
+    mkdir($dirDatas . "/" . $sendDateTimeValue . "/" . "images_sources", 0777);
+    mkdir($dirDatas . "/" . $sendDateTimeValue . "/" . "images_resized", 0777);
+
+    # imagesResizer
+    include "imagesResizer.php";
 
     # iterate trough files and move in files dir 
     for($i = 0; $i < $fileCount; $i++) {
 
-	# check if file is images
-	$imagesExt ="jpg,JPG,jpeg,JPEG,gif,GIF,png,PNG";
-	$imagesExtArr = explode(",", $imagesExt);
-		
+	$fileTmp_name = $_FILES['file']['tmp_name'][$i];
+	$fileName = $_FILES['file']['name'][$i];
 
-	# if
-	move_uploaded_file($_FILES['file']['tmp_name'][$i],  $dirDatas . "/" . $sendDateTimeValue . "/" . "images_sources" . "/". $_FILES['file']['name'][$i]);
+	# mime type	
+	$mime = mime_content_type($fileTmp_name);
+	$reg_image = '/image\/.*/';
 
+	# if image or else
+	if (preg_match($reg_image, $mime)) {
+	    # move into images_sources	    
+	    move_uploaded_file($fileTmp_name,  $dirDatas . "/" . $sendDateTimeValue . "/" . "images_sources" . "/". $fileName);
+	    # resize and move into images_resized
+	    smart_resize_image($dirDatas . "/" . $sendDateTimeValue . "/" . "images_sources" . "/". $fileName, null, 300 , 300, true , $dirDatas . "/" . $sendDateTimeValue . "/" . "images_resized" . "/". $fileName , false , false ,100 );
+	} else {
+
+	    # mote to files
+	    move_uploaded_file($fileTmp_name,  $dirDatas . "/" . $sendDateTimeValue . "/" . "files" . "/". $fileName);
+	}
     }
 
     # xml dom doc and params
@@ -99,7 +113,7 @@
     $xml->save($file);
     
     # message 
-    echo "Votre post a bien été envoyé. Merci.";
+    echo "mime : " . $mime . $type ."Votre post a bien été envoyé. Merci.";
     
     }
 

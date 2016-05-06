@@ -46,6 +46,7 @@
 	<h2>Fichier(s)</h2>
 	<p>Sélectionner les fichiers à uploader.</p>
 	<input id="file" name="file[]" multiple="multiple" type="file">
+	<button id="fileCleanBtn">Clean file(s)</button>
     </div>
 
     <div id="sendArea">

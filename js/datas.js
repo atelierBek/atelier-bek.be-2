@@ -14,6 +14,7 @@ function datasVars(){
     
     sendDiv = document.getElementById("sendDiv");
     sendBtn = document.getElementById("sendBtn");
+    fileCleanBtn = document.getElementById("fileCleanBtn");
 
     // function : datasEventsListeners
     datasEventsListeners();
@@ -28,6 +29,9 @@ function datasEventsListeners() {
     
     // sendBtn -> click -> function : datasPost
     sendBtn.addEventListener("click", datasPost);
+
+    // fileCleanBtn -> click -> function : fileClean
+    fileCleanBtn.addEventListener("click", fileClean);
 
 }
 
@@ -107,6 +111,17 @@ function datasPost(){
 	alert(content);
 	datasGet();
     });
+}
+
+// -------------------- 
+
+// # FILE CLEAN INPUT
+
+function fileClean(){
+    console.log("function : fileClean");
+
+    $("#file").val('');
+      
 }
 
 // -------------------- 
